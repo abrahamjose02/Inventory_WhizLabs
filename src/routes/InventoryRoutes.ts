@@ -2,8 +2,6 @@ import express from 'express'
 import { InventoryController } from '../controllers/InventoryController'
 import { validateRequest } from '../middleware/validateRequest'
 import { inventorySchema } from '../validators/inventoryValidators'
-import { InventoryRepository } from '../repositories/InventoryRepositories'
-import { InventoryService } from '../services/InventoryServices'
 
 const router = express.Router()
 
