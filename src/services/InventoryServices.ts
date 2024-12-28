@@ -1,13 +1,14 @@
 import { IInventoryItem } from "../types/inventoryTypes";
 import { InventoryRepository } from "../repositories/InventoryRepositories";
 import { NotFoundError,ValidationError } from "../utils/error";
+import { IInventoryService } from "../interfaces/IInventoryServices";
+import { IInventoryRepository } from "../interfaces/IInventoryRepositories";
 
+export class InventoryService implements IInventoryService{
+    private repository:IInventoryRepository;
 
-export class InventoryService{
-    private repository:InventoryRepository;
-
-    constructor(){
-        this.repository = new InventoryRepository()
+    constructor(repository:IInventoryRepository){
+        this.repository = repository
     }
 
     private validateItem(item:IInventoryItem):void{

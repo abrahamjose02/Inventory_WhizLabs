@@ -3,12 +3,13 @@
 import { Request,Response,NextFunction } from "express";
 import { InventoryService } from "../services/InventoryServices";
 import { asyncHandler } from "../utils/asyncHandler";
+import { IInventoryService } from "../interfaces/IInventoryServices";
 
 export class InventoryController{
-    private service:InventoryService
+    private service:IInventoryService
 
-    constructor(){
-        this.service = new InventoryService()
+    constructor(service:IInventoryService){
+        this.service = service
     }
 
     createItem = asyncHandler(async(req:Request,res:Response)=>{

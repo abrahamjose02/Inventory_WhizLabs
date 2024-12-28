@@ -2,10 +2,14 @@ import express from 'express'
 import { InventoryController } from '../controllers/InventoryController'
 import { validateRequest } from '../middleware/validateRequest'
 import { inventorySchema } from '../validators/inventoryValidators'
+import { InventoryRepository } from '../repositories/InventoryRepositories'
+import { InventoryService } from '../services/InventoryServices'
 
 const router = express.Router()
 
-const controller = new InventoryController()
+const repository = new InventoryRepository();
+const service = new InventoryService(repository);
+const controller = new InventoryController(service);
 
 router.post("/", validateRequest(inventorySchema), controller.createItem);
 router.get("/", controller.getAllItems);

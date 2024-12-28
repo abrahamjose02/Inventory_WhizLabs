@@ -2,8 +2,9 @@
 
 import { IInventoryItem } from "../types/inventoryTypes";
 import { InventoryModel } from "../models/InventoryModel";
+import { IInventoryRepository } from "../interfaces/IInventoryRepositories";
 
-export class InventoryRepository{
+export class InventoryRepository implements IInventoryRepository{
 
     async create(item:IInventoryItem):Promise<IInventoryItem>{
         return await InventoryModel.create(item)
