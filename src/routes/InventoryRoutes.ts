@@ -11,10 +11,10 @@ const repository = new InventoryRepository();
 const service = new InventoryService(repository);
 const controller = new InventoryController(service);
 
-router.post("/", validateRequest(inventorySchema), controller.createItem);
+router.post("/", controller.createItem);
 router.get("/", controller.getAllItems);
 router.get("/:id", controller.getItemById);
-router.put("/:id", validateRequest(inventorySchema), controller.updateItem);
+router.put("/:id", controller.updateItem);
 router.delete("/:id", controller.deleteItem);
 
 export default router;
