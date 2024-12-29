@@ -30,6 +30,13 @@ export class InventoryService implements IInventoryService{
 
     async createItem(item:IInventoryItem):Promise<IInventoryItem>{
         this.validateItem(item);
+        const existingItem = await this.repository.findByName(item.itemName);
+        if(existingItem){
+            throw new ValidationError(
+              `The item name "${item.itemName}" already exists. Please choose a different name.`
+            );
+        }
+        
         return await this.repository.create(item);
     }
 
@@ -46,6 +53,16 @@ export class InventoryService implements IInventoryService{
     }
 
     async updateItem(id:string,item:Partial<IInventoryItem>):Promise<IInventoryItem>{
+
+        if(item.itemName){
+            const existingItem = await this.repository.findByName(item.itemName)
+            if(existingItem && existingItem._id !== id){
+                throw new ValidationError(
+                  `The item name "${item.itemName}" already exists. Please choose a different name.`
+                );
+            }
+        }
+
         const updatedItem = await this.repository.update(id,item)
         if(!updatedItem){
             throw new NotFoundError('Item not found')

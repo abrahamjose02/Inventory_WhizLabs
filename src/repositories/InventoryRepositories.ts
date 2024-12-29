@@ -18,6 +18,11 @@ export class InventoryRepository implements IInventoryRepository{
         return await InventoryModel.findById(id)
     }
 
+    async findByName(itemName:String):Promise<IInventoryItem | null>{
+        const regex = new RegExp(`^${itemName}$`,'i') //case-insensitive regex match
+        return await InventoryModel.findOne({itemName:{$regex:regex}})
+    }
+
     async update(id:string,item: Partial<IInventoryItem>):Promise<IInventoryItem | null>{
         return await InventoryModel.findByIdAndUpdate(id,item,{new:true})
     }
