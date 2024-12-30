@@ -1,6 +1,7 @@
 
 // Explicitly Defining the Types of Inventory Items
 
+// The IInventoryItem interface defines the structure of the inventory item object. The interface contains the following properties:
 export interface IInventoryItem{
     _id?:string;
     itemName:string;

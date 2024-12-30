@@ -3,13 +3,15 @@
 import { Request,Response,NextFunction } from "express";
 import { ValidationError,NotFoundError } from "../utils/error";
 
+//Error Handler Middleware
 export const errorHandler = (err:Error,req:Request,res:Response,next:NextFunction):void =>{
     console.error(err)
 
+//Check if the headers have been sent
     if(res.headersSent){
      return next(err)
     }
-
+    //Check if the error is an instance of the custom error classes
     if(err instanceof ValidationError){
          res
            .status(400)
@@ -21,6 +23,8 @@ export const errorHandler = (err:Error,req:Request,res:Response,next:NextFunctio
            .status(404)
            .json({ success: false, statusCode: 404, error: err.message });
     }
+
+     //Handle other errors
 
      res
        .status(500)

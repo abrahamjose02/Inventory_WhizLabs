@@ -1,5 +1,6 @@
 import { IInventoryItem } from "../types/inventoryTypes";
 
+// Interface for the Inventory Service
 export interface IInventoryService {
   createItem(item: IInventoryItem): Promise<IInventoryItem >;
   getAllItems(): Promise<IInventoryItem[]>;
